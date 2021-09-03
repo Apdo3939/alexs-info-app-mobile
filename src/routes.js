@@ -10,9 +10,9 @@ const Stack = createStackNavigator();
 export default function Routes() {
     const screenOptions = {
         headerStyle: {
-            backgroundColor: '#223322'
+            backgroundColor: '#005500'
         },
-        headerTintColor: '#bbbbbb'
+        headerTintColor: '#eeeeee'
     }
     return (
         <NavigationContainer>
