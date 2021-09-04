@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { Alert, FlatList, Text, View, StyleSheet } from "react-native";
-import { useFocusEffect } from '@react-navigation/native';
+import { Alert, FlatList, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import api from '../../config/configApi';
 
 export default function Home() {
+    const navigation = useNavigation();
     const [budgets, setBudgets] = useState('');
 
     const getListBudget = async () => {
@@ -24,14 +25,19 @@ export default function Home() {
     return (
         <View style={styles.container}>
             <Text style={styles.title} >Listar Orçamentos</Text>
+
             <FlatList
                 style={styles.listData}
                 data={budgets}
                 renderItem={({ item }) => (
-                    <View style={styles.listContent}>
-                        <Text style={styles.textTitle}>{item.id + ' - ' + item.name}</Text>
-                        <Text style={styles.textDesc}>{item.subject}</Text>
-                    </View>
+                    <TouchableOpacity onPress={() => navigation.navigate('Services', {
+                        budgetId: item.id
+                    })}>
+                        <View style={styles.listContent}>
+                            <Text style={styles.textTitle}>{item.id + ' - ' + item.name}</Text>
+                            <Text style={styles.textDesc}>{item.subject}</Text>
+                        </View>
+                    </TouchableOpacity>
                 )} keyExtractor={budget => String(budget.id)}
             />
         </View>
@@ -66,12 +72,14 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '700',
         color: '#005500',
-        marginBottom: 5
+        marginBottom: 5,
+        textTransform: 'capitalize'
     },
     textDesc: {
         fontSize: 22,
         fontWeight: '700',
         color: '#005555',
-        marginBottom: 5
+        marginBottom: 5,
+        textTransform: 'uppercase'
     }
 });

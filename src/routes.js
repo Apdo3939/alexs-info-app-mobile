@@ -22,7 +22,10 @@ export default function Routes() {
                     component={Home}
                     options={{ headerTitle: 'Listar Orçamento' }} />
                 <Stack.Screen name="Contact" component={Contact} />
-                <Stack.Screen name="Services" component={Services} />
+                <Stack.Screen
+                    name="Services"
+                    component={Services}
+                    options={{ headerTitle: 'Visualizar Orçamento' }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
